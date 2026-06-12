@@ -57,8 +57,7 @@ button:focus-visible {
   line-height: 1.2;
 }
 
-.start-screen button,
-.game-over button {
+.start-screen button {
   padding: 14px 24px;
   background: #33ff33;
   color: #101510;
@@ -197,22 +196,26 @@ canvas {
 
 .game-over {
   position: absolute;
-  top: 50%;
+  top: 40%;
   left: 50%;
-  width: min(88vw, 560px);
-  transform: translate(-50%, -50%);
-  padding: 28px;
+  transform: translateX(-50%);
   color: white;
   text-align: center;
-  text-shadow: 0 0 14px rgba(255, 255, 255, 0.55);
-  background: rgba(0, 0, 0, 0.68);
-  border: 2px solid rgba(255, 255, 255, 0.4);
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.55);
 }
 
 .game-over h2 {
-  margin: 0 0 24px;
+  margin: 0;
   font-size: clamp(1rem, 4vw, 2rem);
   line-height: 1.5;
+}
+
+.game-over button {
+  margin-top: 20px;
+  padding: 12px 24px;
+  background-color: white;
+  color: #111;
+  font-size: 18px;
 }
 
 .danger {
