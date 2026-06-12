@@ -4,6 +4,12 @@ PongWar is an arcade-style game that remixes gameplay mechanics inspired by two 
 
 It's a joke in the age of AI.
 
+## Background
+
+This game was finished more than a year ago, before Codex-style AI coding agents and today's AI programming workflows had become common. Looking back at it now feels a little strange: the game jokes about facing an almost unbeatable AI, and in the short time since then, AI tools have already started helping people build, fix, and publish projects like this one.
+
+The speed of that change is the real punchline. What once felt like a joke inside a small arcade experiment now feels much closer to everyday creative work.
+
 ## Play
 
 - Move the mouse to control the player paddle.
