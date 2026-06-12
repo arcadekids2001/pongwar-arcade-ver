@@ -12,8 +12,8 @@ const App = Vue.createApp({
         x: 320,
         y: 240,
         radius: 10,
-        dx: 4,
-        dy: 3,
+        dx: 5.8,
+        dy: 4.4,
       },
       leftPaddle: {
         x: 20,
@@ -26,7 +26,7 @@ const App = Vue.createApp({
         y: 200,
         width: 10,
         height: 80,
-        speed: 3,
+        speed: 4.6,
       },
       bullets: [],
       playerHealth: 5,
@@ -85,7 +85,7 @@ const App = Vue.createApp({
         y: this.leftPaddle.y + this.leftPaddle.height / 2,
         width: 20,
         height: 5,
-        speed: 5,
+        speed: 7,
       });
     },
 
@@ -193,8 +193,8 @@ const App = Vue.createApp({
     resetBall() {
       this.ball.x = this.width / 2;
       this.ball.y = this.height / 2;
-      this.ball.dx = (Math.random() > 0.5 ? 1 : -1) * 4;
-      this.ball.dy = (Math.random() > 0.5 ? 1 : -1) * 3;
+      this.ball.dx = (Math.random() > 0.5 ? 1 : -1) * 5.8;
+      this.ball.dy = (Math.random() > 0.5 ? 1 : -1) * 4.4;
     },
 
     endGame(message) {
