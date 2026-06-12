@@ -196,9 +196,9 @@ canvas {
 
 .game-over {
   position: absolute;
-  top: 40%;
+  top: 50%;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translate(-50%, -50%);
   color: white;
   text-align: center;
   text-shadow: 0 0 10px rgba(255, 255, 255, 0.55);
@@ -216,6 +216,16 @@ canvas {
   background-color: white;
   color: #111;
   font-size: 18px;
+  outline: none;
+  box-shadow: none;
+}
+
+.game-over button:hover,
+.game-over button:focus-visible {
+  background-color: white;
+  color: #111;
+  outline: none;
+  box-shadow: none;
 }
 
 .danger {
