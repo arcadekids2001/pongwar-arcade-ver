@@ -19,6 +19,7 @@ button {
   border: 0;
   border-radius: 6px;
   cursor: pointer;
+  outline: none;
 }
 
 button:hover,
@@ -27,8 +28,7 @@ button:focus-visible {
   background-color: #66ff66;
   color: #050805;
   box-shadow: 0 0 12px #66ff66, 0 0 24px #66ff66;
-  outline: 2px solid #d7ffd7;
-  outline-offset: 4px;
+  outline: none;
 }
 
 .start-screen,
@@ -217,15 +217,14 @@ canvas {
   color: #111;
   font-size: 18px;
   outline: none;
-  box-shadow: none;
 }
 
 .game-over button:hover,
 .game-over button:focus-visible {
-  background-color: white;
-  color: #111;
+  background-color: #f5f5f5;
+  color: black;
   outline: none;
-  box-shadow: none;
+  box-shadow: 0 0 12px white, 0 0 24px rgba(255, 255, 255, 0.75);
 }
 
 .danger {
