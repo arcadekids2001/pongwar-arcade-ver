@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="PongWAR! is a small arcade game that mixes Pong with Spacewar-inspired shooting."
+      content="PongWar is an arcade-style game that remixes gameplay mechanics inspired by Pong and Spacewar!. Face off against an almost unbeatable AI, shoot bullets, and try to turn the tide."
     />
     <title>PongWAR! Arcade Ver.2</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -17,6 +17,12 @@
     <link rel="stylesheet" href="./style.css" />
   </head>
   <body>
+    <!--
+      PongWar is an arcade-style game that remixes gameplay mechanics inspired by two early classic games: Pong and Spacewar!.
+      Players must face off in a Pong match against an almost unbeatable AI. Fortunately, players can shoot bullets to attack the AI and turn the tide in their favor.
+      It's a joke in the age of AI.
+      Use your mouse to move and spacebar to shoot. Try to defeat the AI!
+    -->
     <div id="app">
       <main v-if="!gameStart" class="start-screen">
         <h1 class="title-blink">{{ title }}</h1>

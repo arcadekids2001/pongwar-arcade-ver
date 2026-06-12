@@ -1,6 +1,8 @@
 # PongWAR! Arcade Ver.2
 
-PongWAR! is a small arcade game that mixes classic Pong with Spacewar-inspired shooting. You play against a stubborn AI paddle, but you can shoot to chip away at its health and turn the match around.
+PongWar is an arcade-style game that remixes gameplay mechanics inspired by two early classic games: Pong and Spacewar!. Players must face off in a Pong match against an almost unbeatable AI. Fortunately, players can shoot bullets to attack the AI and turn the tide in their favor.
+
+It's a joke in the age of AI.
 
 ## Play
 
