@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="PongWAR! is a small arcade game that mixes Pong with Spacewar-inspired shooting."
+    />
+    <title>PongWAR! Arcade Ver.2</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <div id="app">
+      <main v-if="!gameStart" class="start-screen">
+        <h1 class="title-blink">{{ title }}</h1>
+        <button @click="startGame" class="blink-button" type="button">Start Game</button>
+        <p class="control-tip">Try to beat the AI.</p>
+        <p class="control-tip">Mouse: Move</p>
+        <p class="control-tip">Space: Shoot</p>
+      </main>
+
+      <main
+        v-else
+        ref="gameContainer"
+        class="game-container"
+        @mousemove="handleMouseMove"
+      >
+        <section class="crt-frame" aria-label="PongWAR arcade screen">
+          <div class="crt-screen">
+            <div class="noise-overlay" aria-hidden="true"></div>
+            <div :class="['canvas-wrapper', { danger: playerHealth <= 2 && !gameOver }]">
+              <canvas ref="gameCanvas" width="800" height="400"></canvas>
+            </div>
+          </div>
+        </section>
+
+        <div :class="['scoreboard', { danger: playerHealth === 2 }]">
+          <span>Player Health: {{ playerHealth }} / 5</span>
+          <span>AI Health: {{ aiHealth }} / 10</span>
+        </div>
+
+        <section v-if="gameOver" class="game-over" aria-live="polite">
+          <h2>{{ gameOverText }}</h2>
+          <button @click="restartGame" type="button">Restart</button>
+        </section>
+      </main>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/3.2.37/vue.global.prod.min.js"></script>
+    <script src="./script.js"></script>
+  </body>
+</html>
