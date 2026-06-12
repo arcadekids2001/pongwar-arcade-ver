@@ -4,25 +4,26 @@ const App = Vue.createApp({
       title: "PongWAR!",
       canvas: null,
       ctx: null,
-      width: 800,
-      height: 400,
+      width: 640,
+      height: 480,
       animationFrameId: null,
+      lastFrameTime: null,
       ball: {
-        x: 400,
-        y: 200,
+        x: 320,
+        y: 240,
         radius: 10,
         dx: 4,
         dy: 3,
       },
       leftPaddle: {
         x: 20,
-        y: 150,
+        y: 200,
         width: 10,
         height: 80,
       },
       rightPaddle: {
-        x: 770,
-        y: 150,
+        x: 610,
+        y: 200,
         width: 10,
         height: 80,
         speed: 3,
@@ -53,7 +54,7 @@ const App = Vue.createApp({
         this.ctx = this.canvas.getContext("2d");
         this.canvas.width = this.width;
         this.canvas.height = this.height;
-        this.gameLoop();
+        this.startLoop();
       });
     },
 
@@ -88,19 +89,30 @@ const App = Vue.createApp({
       });
     },
 
-    gameLoop() {
+    startLoop() {
+      cancelAnimationFrame(this.animationFrameId);
+      this.lastFrameTime = null;
+      this.animationFrameId = requestAnimationFrame((timestamp) => this.gameLoop(timestamp));
+    },
+
+    gameLoop(timestamp) {
       if (this.gameOver) {
         return;
       }
 
-      this.update();
+      const frameDuration = 1000 / 60;
+      const elapsed = this.lastFrameTime === null ? frameDuration : timestamp - this.lastFrameTime;
+      const frameScale = Math.min(elapsed / frameDuration, 2);
+
+      this.lastFrameTime = timestamp;
+      this.update(frameScale);
       this.draw();
-      this.animationFrameId = requestAnimationFrame(this.gameLoop);
+      this.animationFrameId = requestAnimationFrame((nextTimestamp) => this.gameLoop(nextTimestamp));
     },
 
-    update() {
-      this.ball.x += this.ball.dx;
-      this.ball.y += this.ball.dy;
+    update(frameScale) {
+      this.ball.x += this.ball.dx * frameScale;
+      this.ball.y += this.ball.dy * frameScale;
 
       if (this.ball.y - this.ball.radius <= 0 || this.ball.y + this.ball.radius >= this.height) {
         this.ball.dy *= -1;
@@ -136,7 +148,7 @@ const App = Vue.createApp({
       }
 
       this.bullets = this.bullets
-        .map((bullet) => ({ ...bullet, x: bullet.x + bullet.speed }))
+        .map((bullet) => ({ ...bullet, x: bullet.x + bullet.speed * frameScale }))
         .filter((bullet) => bullet.x <= this.width);
 
       this.bullets.forEach((bullet) => {
@@ -159,16 +171,17 @@ const App = Vue.createApp({
         return;
       }
 
-      this.updateAI();
+      this.updateAI(frameScale);
     },
 
-    updateAI() {
+    updateAI(frameScale) {
       const targetY = this.ball.y - this.rightPaddle.height / 2;
+      const aiStep = this.rightPaddle.speed * frameScale;
 
       if (this.rightPaddle.y < targetY) {
-        this.rightPaddle.y += this.rightPaddle.speed;
+        this.rightPaddle.y += aiStep;
       } else if (this.rightPaddle.y > targetY) {
-        this.rightPaddle.y -= this.rightPaddle.speed;
+        this.rightPaddle.y -= aiStep;
       }
 
       this.rightPaddle.y = Math.max(
@@ -188,6 +201,8 @@ const App = Vue.createApp({
       this.gameOver = true;
       this.gameOverText = message;
       cancelAnimationFrame(this.animationFrameId);
+      this.animationFrameId = null;
+      this.lastFrameTime = null;
     },
 
     restartGame() {
@@ -196,10 +211,10 @@ const App = Vue.createApp({
       this.gameOver = false;
       this.gameOverText = "";
       this.bullets = [];
-      this.leftPaddle.y = 150;
-      this.rightPaddle.y = 150;
+      this.leftPaddle.y = 200;
+      this.rightPaddle.y = 200;
       this.resetBall();
-      this.gameLoop();
+      this.startLoop();
     },
 
     draw() {
